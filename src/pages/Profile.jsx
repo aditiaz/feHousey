@@ -72,12 +72,6 @@ export function Profile(props) {
       ...form,
       [e.target.name]: e.target.type === "file" ? e.target.files : e.target.value,
     });
-
-    // Create image url for preview
-    // if (e.target.type === "file") {
-    //   let url = URL.createObjectURL(e.target.files[0]);
-    //   setPreview(url);
-    // }
   };
 
   const handleSubmitImg = useMutation(async (e) => {
@@ -230,9 +224,7 @@ export function Profile(props) {
             >
               <form>
                 <Card.Img
-                  src={
-                    form.image == "" ? `http://localhost:5000/uploads/${tenant?.image}` : form.image
-                  }
+                  src={form.image == "" ? tenant.image : form.image}
                   style={{ width: "220px", height: "300px" }}
                 />
                 <input type="file" id="upload" name="image" hidden onChange={handleChangeImg} />
@@ -240,15 +232,11 @@ export function Profile(props) {
                   style={{ cursor: "pointer" }}
                   for="upload"
                   className="label-file-add-product"
-                >
-                  Upload file
-                </label>
+                ></label>
                 <Button onClick={(e) => handleSubmitImg.mutate(e)} type="submit">
                   Save
                 </Button>
               </form>
-
-              <label htmlFor="input-pic">Change Photo Profile</label>
 
               <input
                 onChange={(e) => {

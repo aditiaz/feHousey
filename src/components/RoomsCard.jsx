@@ -30,7 +30,7 @@ export const RoomsCard = () => {
         {property?.map((e, k) => {
           return (
             <Col xs={3} sm={3} style={{ width: "25rem" }}>
-              <Card key={e.imageUrl}>
+              <Card key={e.image}>
                 <div>
                   {e.amenities.map((amenity, k) => (
                     <span
