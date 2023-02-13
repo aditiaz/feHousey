@@ -46,20 +46,20 @@ export const DetailProperty = () => {
           {/* <Col className="" style={{ backgroundColor: "green", height: "45rem" }}> */}
           <img
             style={{ width: "100%", height: "35rem", marginTop: "65px" }}
-            src={`http://localhost:5000/uploads/${property?.image}`}
+            src={property?.image}
             alt="pics"
           />
           {/* </Col> */}
         </Col>
         <Col className="d-flex justify-content-between mt-3 detailPics detailPicsSmall">
           <div>
-            <img src={`http://localhost:5000/uploads/${property?.image}`} alt="pics" />
+            <img src={property?.image} alt="pics" />
           </div>
           <div>
-            <img src={`http://localhost:5000/uploads/${property?.image}`} alt="pics" />
+            <img src={property?.image} alt="pics" />
           </div>
           <div>
-            <img src={`http://localhost:5000/uploads/${property?.image}`} alt="pics" />
+            <img src={property?.image} alt="pics" />
           </div>
         </Col>
         <Col>

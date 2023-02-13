@@ -189,7 +189,7 @@ export const SideBar = () => {
               }}
               onClick={() => {
                 setButtons("4");
-                setBed("3");
+                setBed("4");
               }}
             >
               4

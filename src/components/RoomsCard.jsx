@@ -56,7 +56,7 @@ export const RoomsCard = () => {
                   style={{ height: "30rem", cursor: "pointer", marginTop: "-30px" }}
                   onClick={() => navigate(`detail/${e.id}`)}
                   // variant="top"
-                  src={`http://localhost:5000/uploads/${e.image}`}
+                  src={e.image}
                 />
                 <Card.Body>
                   <Card.Title>

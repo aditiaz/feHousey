@@ -72,7 +72,7 @@ export const AddProperty = () => {
     } catch (err) {
       const alert = (
         <Alert variant="danger" className="py-1">
-          Unauthorized
+          Error
         </Alert>
       );
       setMessage(alert);
