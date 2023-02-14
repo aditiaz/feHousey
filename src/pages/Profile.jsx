@@ -223,16 +223,16 @@ export function Profile(props) {
               style={{ width: "220px", border: "none" }}
             >
               <form>
-                <Card.Img src={tenant?.image} style={{ width: "220px", height: "300px" }} />
+                <Card.Img src={profile} style={{ width: "220px", height: "300px" }} />
                 <input type="file" id="upload" name="image" hidden onChange={handleChangeImg} />
                 <label
                   style={{ cursor: "pointer" }}
                   for="upload"
                   className="label-file-add-product"
                 ></label>
-                <Button onClick={(e) => handleSubmitImg.mutate(e)} type="submit">
+                {/* <Button onClick={(e) => handleSubmitImg.mutate(e)} type="submit">
                   Save
-                </Button>
+                </Button> */}
               </form>
 
               <input
