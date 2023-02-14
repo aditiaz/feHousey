@@ -45,6 +45,7 @@ export function Profile(props) {
       if (password.new_password != password.confirm_password) {
         return alert("password baru dan konfirmasi tidak sesuai");
       }
+      setShow(false);
 
       alert("successfuly change password!");
     } catch (error) {
