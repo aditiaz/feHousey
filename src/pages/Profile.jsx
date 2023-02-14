@@ -223,10 +223,7 @@ export function Profile(props) {
               style={{ width: "220px", border: "none" }}
             >
               <form>
-                <Card.Img
-                  src={form.image == "" ? tenant.image : form.image}
-                  style={{ width: "220px", height: "300px" }}
-                />
+                <Card.Img src={tenant.image} style={{ width: "220px", height: "300px" }} />
                 <input type="file" id="upload" name="image" hidden onChange={handleChangeImg} />
                 <label
                   style={{ cursor: "pointer" }}
