@@ -46,6 +46,7 @@ export const SignIn = (props) => {
         type: "LOGIN_SUCCESS",
         payload: responseLogIn.data.data,
       });
+      alert("Login Succes");
 
       if (responseLogIn.data.data.listAs == "Owner") {
         navigate("/indexOwner");
