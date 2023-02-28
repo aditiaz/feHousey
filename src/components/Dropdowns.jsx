@@ -96,16 +96,7 @@ const DropdownOwner = () => {
           <BsPerson />
           <span style={{ color: "black" }}> Profile</span>
         </Dropdown.Item>
-        <Dropdown.Item
-          onClick={() => {
-            navigate("/indexOwner/");
-          }}
-          className="dropDownNav"
-        >
-          <BsListUl />
 
-          <span style={{ color: "black" }}> List Properties</span>
-        </Dropdown.Item>
         <Dropdown.Item
           onClick={() => {
             navigate("/addProperty/");
@@ -118,7 +109,7 @@ const DropdownOwner = () => {
         </Dropdown.Item>
         <Dropdown.Item
           onClick={() => {
-            navigate("/historiesOwner/");
+            navigate("/indexOwner/");
           }}
           className="dropDownNav"
         >

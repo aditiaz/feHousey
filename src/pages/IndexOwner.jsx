@@ -3,8 +3,15 @@ import React, { useContext } from "react";
 import { Navbars } from "../components";
 import { Row, Container, Table } from "react-bootstrap";
 import magnifiyIc from "../assets/magnifiyIc.svg";
+import { API } from "../lib/_api";
+import { useQuery } from "react-query";
 
 export const IndexOwner = () => {
+  let { data: transactions } = useQuery("transactionsCache", async () => {
+    const response = await API.get("/transactions");
+    return response.data.data;
+  });
+
   const { users } = useContext(RoomsContext);
   const changeColor = (status) => {
     return status === "Approve" ? "success" : status === "Pending" ? "warning" : "danger";
@@ -20,24 +27,22 @@ export const IndexOwner = () => {
               <th>No</th>
               <th>Users</th>
               <th>Type of Rent</th>
-              <th>Bukti Transfer</th>
-              <th>Status Payment</th>
-              <th>Action</th>
+
+              <th>Check In</th>
+              <th>Check Out</th>
+              <th>Status</th>
             </tr>
           </thead>
           <tbody>
-            {users.map((e, i) => {
+            {transactions?.map((e, i) => {
               return (
                 <tr>
-                  <td>{e.no}</td>
-                  <td>{e.user}</td>
-                  <td>{e.period}</td>
-                  <td>{e.tfProf}</td>
+                  <td>{i + 1}</td>
+                  <td>{e.user.fullname}</td>
+                  <td>{e.property.type_of_rent}</td>
+                  <td>{e.check_in}</td>
+                  <td>{e.check_out}</td>
                   <td className={`text-${changeColor(e.status)}`}>{e.status}</td>
-
-                  <td>
-                    <img src={magnifiyIc} alt="magnify" />
-                  </td>
                 </tr>
               );
             })}

@@ -8,19 +8,16 @@ import * as Components from "./index";
 import { useContext } from "react";
 import { RoomsContext } from "../context/roomsContext";
 import { useNavigate } from "react-router-dom";
-import { API } from "../lib/_api";
-import { useQuery } from "react-query";
 
 export const Navbars = () => {
   const { modalSignUp, setModalSignUp, modalSignIn, setModalSignIn } = useContext(RoomsContext);
   const roles = localStorage.Roles;
-  // console.log(roles);
 
   const navigate = useNavigate();
 
   return (
     <>
-      <Navbar className="d-flex justify-content-around  fixed-top top-0" bg="white">
+      <Navbar className="d-flex justify-content-between  fixed-top top-0 px-5 " bg="white">
         <Navbar.Brand href="#home">
           <img
             onClick={() => {
@@ -31,17 +28,7 @@ export const Navbars = () => {
             alt="logo"
           />
         </Navbar.Brand>
-        <InputGroup className="w-25 ">
-          <Form.Control
-            className="bg-light d-flex "
-            placeholder="Search"
-            aria-label="Search"
-            aria-describedby="basic-addon2"
-          />
-          <InputGroup.Text id="basic-addon2">
-            <BsSearch strokeWidth={0.5} fontSize={29} style={{ cursor: "pointer" }} />
-          </InputGroup.Text>
-        </InputGroup>
+
         {roles == "Owner" ? (
           <>
             <Components.DropdownOwner />

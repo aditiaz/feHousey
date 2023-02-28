@@ -3,29 +3,22 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { BsCalendar3 } from "react-icons/bs";
-import "react-datepicker/dist/react-datepicker.css";
 import { useState, useContext } from "react";
-import { Calendar } from "./Calendar";
 import { RoomsContext } from "../context/roomsContext";
 import { API } from "../lib/_api";
 import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
 
 export const SideBar = () => {
-  const navigate = useNavigate();
   const [buttons, setButtons] = useState("1");
   const [button, setButton] = useState("1");
   const [btnTime, setBtnTime] = useState("month");
 
   const [durationVal, setDuration] = useState("");
-  const [dateVal, setDate] = useState("");
   const [bedVal, setBed] = useState("");
   const [bathVal, setBath] = useState("");
   const [amenitiesVal, setAmenities] = useState([]);
   const [budgetVal, setBudget] = useState(9000000);
-  const { filter, setFiltered } = useContext(RoomsContext);
-  // console.log(durationVal, dateVal, bedVal, bathVal, amenitiesVal, budgetVal);
+  const { setFiltered } = useContext(RoomsContext);
   const handleSubmit = useMutation(async (e) => {
     try {
       e.preventDefault();
@@ -39,7 +32,17 @@ export const SideBar = () => {
 
       // Insert data for login process
       const response = await API.get(
-        "/multifilter?type_of_rent=" + durationVal + "&bedroom=" + bedVal + "&bathroom=" + bathVal,
+        "/multifilter?type_of_rent=" +
+          durationVal +
+          "&price=" +
+          budgetVal +
+          "&bedroom=" +
+          bedVal +
+          "&bathroom=" +
+          bathVal +
+          '&amenities=["' +
+          amenitiesVal.join('","') +
+          '"]',
         config
       );
 
@@ -102,7 +105,7 @@ export const SideBar = () => {
               className={btnTime === "year" ? "py-2 w-25 click" : "py-2 w-25 noClick"}
               onClick={() => {
                 setBtnTime("year");
-                setDuration("Year");
+                setDuration("Week");
               }}
               size="md"
             >
@@ -110,16 +113,7 @@ export const SideBar = () => {
             </Button>
           </Col>
           {/* button end */}
-          <h4 className="mt-3">Date</h4>
-          <Row style={{ width: "", height: "" }} className="mt-1   ">
-            <Col className="col-2  mt-1 border-4 border-dark-subtle">
-              <BsCalendar3 className="d-flex mx-auto my-auto" size={20} />
-            </Col>
 
-            <Col className="col-10  d-flex my-auto">
-              <Calendar />
-            </Col>
-          </Row>
           <h4 className="my-3">Property Room</h4>
           {/* BedRoom */}
           <h6 className="text-secondary my-3">Bed Room</h6>
@@ -366,7 +360,15 @@ export const SideBar = () => {
                   <h6>Less than IDR.</h6>
                 </Form.Label>
                 <Col sm={7}>
-                  <Form.Control size="md" type="text" className="bg-light" />
+                  <Form.Control
+                    size="md"
+                    type="number"
+                    name="price"
+                    placeholder="Choose Price"
+                    value={budgetVal}
+                    onChange={(e) => setBudget(e.target.value)}
+                    className="bg-light"
+                  />
                 </Col>
                 <Col className="d-flex justify-content-end mt-3">
                   <Button

@@ -194,7 +194,11 @@ export const MyBookingPending = () => {
               </Row>
             );
           } else {
-            <h1>You haven't booked yet</h1>;
+            return (
+              <div style={{ marginTop: "25rem", display: "flex", justifyContent: "center" }}>
+                <h1>You haven't booked yet</h1>
+              </div>
+            );
           }
         })}
       </Container>

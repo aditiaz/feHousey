@@ -24,12 +24,6 @@ if (localStorage.token) {
 }
 
 function App() {
-  // const roles = localStorage.Roles;
-  // const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   navigate("/");
-  // }, [roles]);
   return (
     <>
       <RoomsContextProvider>
