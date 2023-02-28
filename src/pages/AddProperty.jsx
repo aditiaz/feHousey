@@ -169,7 +169,6 @@ export const AddProperty = () => {
             <option value="Day">Day</option>
             <option value="Week">Week</option>
             <option value="Month">Month</option>
-            <option value="Year">Year</option>
           </Form.Select>
         </Form.Group>
         <Form.Group name="amenities" className="mb-3">

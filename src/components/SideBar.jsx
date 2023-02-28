@@ -106,7 +106,7 @@ export const SideBar = () => {
               }}
               size="md"
             >
-              Year
+              Week
             </Button>
           </Col>
           {/* button end */}
