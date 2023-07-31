@@ -37,8 +37,6 @@ export function Profile(props) {
   const handleSubPass = useMutation(async (e) => {
     try {
       e.preventDefault();
-      // Insert product data
-
       const response = await API.patch("/changepassword", password);
       console.log("berhasil ubah password", response.data);
 
