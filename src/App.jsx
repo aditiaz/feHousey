@@ -8,13 +8,17 @@ import { MyBooking } from "./pages/MyTicket";
 import { RoomsContextProvider } from "./context/roomsContext";
 import { Profile } from "./pages/Profile";
 import { History } from "./pages/History";
+import { HistoryOwner } from "./pages/HistoryOwner";
 import MyBookingPending from "./pages/MyBookingPending";
 import IndexOwner from "./pages/IndexOwner";
+
+import { ProfileOwner } from "./pages/ProfileOwner";
 import { AddProperty } from "./pages/AddProperty";
+import InvoiceDetail from "./components/InvoiceDetail";
 import PrivateRoutesAdmin from "./components/PrivateRoutesAdmin";
 import PrivateRoutesTenant from "./components/PrivateRoutesTenant";
-
-import { setAuthToken } from "./lib/_api";
+import { useEffect } from "react";
+import { API, setAuthToken } from "./lib/_api";
 if (localStorage.token) {
   setAuthToken(localStorage.token);
 }
@@ -24,20 +28,22 @@ function App() {
     <>
       <RoomsContextProvider>
         <Routes>
+          <Route path="/historiesOwner/ " element={<HistoryOwner />} />
+          <Route path="/indexOwner/" element={<IndexOwner />} />
+          <Route path="/profileOwner/" element={<ProfileOwner />} />
+          <Route path="/addProperty/" element={<AddProperty />} />
+
           <Route path="/" element={<Home />} />
-          <Route path="/profile/" element={<Profile />} />
+
           <Route path="/detail/:room" element={<DetailProperty />} />
+          <Route path="/booking/:room" element={<MyBooking />} />
+          <Route path="/bookinghistory/" element={<MyBookingPending />} />
+          <Route path="/profile/" element={<Profile />} />
+          <Route path="/histories/" element={<History />} />
 
-          <Route path="/" element={<PrivateRoutesAdmin />}>
-            <Route path="/indexOwner/" element={<IndexOwner />} />
-            <Route path="/addProperty/" element={<AddProperty />} />
-          </Route>
+          <Route path="/invoiceDetail/" element={<InvoiceDetail />} />
 
-          <Route path="/" element={<PrivateRoutesTenant />}>
-            <Route path="/booking/:room" element={<MyBooking />} />
-            <Route path="/bookinghistory/" element={<MyBookingPending />} />
-            <Route path="/histories/" element={<History />} />
-          </Route>
+          <Route path="*" element={<RoomsContextProvider />} />
         </Routes>
       </RoomsContextProvider>
     </>
