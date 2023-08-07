@@ -1,13 +1,10 @@
-import Logo from "../assets/Logo.svg";
-import InputGroup from "react-bootstrap/InputGroup";
-import Form from "react-bootstrap/Form";
-import Navbar from "react-bootstrap/Navbar";
-import Button from "react-bootstrap/Button";
-import { BsSearch } from "react-icons/bs";
-import * as Components from "./index";
-import { useContext } from "react";
-import { RoomsContext } from "../context/roomsContext";
-import { useNavigate } from "react-router-dom";
+import Logo from '../assets/Logo.svg';
+import Navbar from 'react-bootstrap/Navbar';
+import Button from 'react-bootstrap/Button';
+import * as Components from './index';
+import { useContext } from 'react';
+import { RoomsContext } from '../context/roomsContext';
+import { useNavigate } from 'react-router-dom';
 
 export const Navbars = () => {
   const { modalSignUp, setModalSignUp, modalSignIn, setModalSignIn } = useContext(RoomsContext);
@@ -21,19 +18,19 @@ export const Navbars = () => {
         <Navbar.Brand href="#home">
           <img
             onClick={() => {
-              navigate("/");
+              navigate('/');
             }}
-            style={{ width: "200px" }}
+            style={{ width: '200px' }}
             src={Logo}
             alt="logo"
           />
         </Navbar.Brand>
 
-        {roles == "Owner" ? (
+        {roles == 'Owner' ? (
           <>
             <Components.DropdownOwner />
           </>
-        ) : roles == "Tenant" ? (
+        ) : roles == 'Tenant' ? (
           <>
             <Components.DropdownNav />
           </>
@@ -48,7 +45,7 @@ export const Navbars = () => {
               onClick={() => setModalSignIn(true)}
               // disabled
               className="text-secondary fw-bold"
-              style={{ backgroundColor: "rgba(255, 255, 255, 1)", border: "none" }}
+              style={{ backgroundColor: 'rgba(255, 255, 255, 1)', border: 'none' }}
             >
               Sign In
             </Button>
@@ -62,7 +59,7 @@ export const Navbars = () => {
               // disabled
               onClick={() => setModalSignUp(true)}
               className="text-secondary fw-bold"
-              style={{ backgroundColor: "rgba(255, 255, 255, 1)", border: "none" }}
+              style={{ backgroundColor: 'rgba(255, 255, 255, 1)', border: 'none' }}
             >
               Sign up
             </Button>

@@ -1,73 +1,73 @@
-import React, { useState } from "react";
-import { Navbars } from "../components";
-import { Col, Form, Container, Button, Card, Alert } from "react-bootstrap";
-import { API, setAuthToken } from "../lib/_api";
-import { useMutation } from "react-query";
-import { useNavigate } from "react-router-dom";
+import React, { useState } from 'react';
+import { Navbars } from '../components';
+import { Col, Form, Container, Button, Card, Alert } from 'react-bootstrap';
+import { API, setAuthToken } from '../lib/_api';
+import { useMutation } from 'react-query';
+import { useNavigate } from 'react-router-dom';
 
 export const AddProperty = () => {
   const navigate = useNavigate();
   const [preview, setPreview] = useState(null);
   const [message, setMessage] = useState(null);
   const [form, setForm] = useState({
-    name_property: "",
-    city: "",
-    address: "",
-    price: "",
-    type_of_rent: "",
+    name_property: '',
+    city: '',
+    address: '',
+    price: '',
+    type_rent: '',
     amenities: [],
-    bedroom: "",
-    bathroom: "",
-    sqf: "",
-    description: "",
-    image: "",
+    bedroom: '',
+    bathroom: '',
+    sqf: '',
+    description: '',
+    image: '',
   });
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     const { name, value, type, checked } = e.target;
-    if (type === "checkbox") {
+    if (type === 'checkbox') {
       let newAmenities = [...form.amenities];
       if (checked) {
         newAmenities.push(value);
       } else {
-        newAmenities = newAmenities.filter((amen) => amen !== value);
+        newAmenities = newAmenities.filter(amen => amen !== value);
       }
       setForm({ ...form, amenities: newAmenities });
     } else {
-      setForm({ ...form, [name]: type === "file" ? e.target.files : e.target.value });
+      setForm({ ...form, [name]: type === 'file' ? e.target.files : e.target.value });
     }
 
     // Create image url for preview
-    if (e.target.type === "file") {
+    if (e.target.type === 'file') {
       let url = URL.createObjectURL(e.target.files[0]);
-      console.log("ini data blob", url);
+      console.log('ini data blob', url);
       setPreview(url);
     }
   };
 
-  const handleSubmit = useMutation(async (e) => {
+  const handleSubmit = useMutation(async e => {
     try {
       e.preventDefault();
-      console.log("ini data productmu", form);
+      console.log('ini data productmu', form);
       const formData = new FormData();
-      formData.append("name_property", form.name_property);
-      formData.append("city", form.city);
-      formData.append("address", form.address);
-      formData.append("price", form.price);
-      formData.append("amenities", JSON.stringify(form.amenities));
-      formData.append("type_of_rent", form.type_of_rent);
-      formData.append("bedroom", form.bedroom);
-      formData.append("bathroom", form.bathroom);
-      formData.append("sqf", form.sqf);
-      formData.append("description", form.description);
-      formData.append("image", form.image[0]);
+      formData.append('name_property', form.name_property);
+      formData.append('city', form.city);
+      formData.append('address', form.address);
+      formData.append('price', form.price);
+      formData.append('amenities', JSON.stringify(form.amenities));
+      formData.append('type_rent', form.type_rent);
+      formData.append('bedroom', form.bedroom);
+      formData.append('bathroom', form.bathroom);
+      formData.append('sqf', form.sqf);
+      formData.append('description', form.description);
+      formData.append('image', form.image[0]);
 
-      const response = await API.post("/addproperty", formData);
+      const response = await API.post('/property', formData);
 
-      console.log("berhasil menambahkan product", response);
+      console.log('berhasil menambahkan product', response);
       console.log(form.amenities);
       if (response) {
-        navigate("/");
+        navigate('/');
       }
     } catch (err) {
       const alert = (
@@ -76,7 +76,7 @@ export const AddProperty = () => {
         </Alert>
       );
       setMessage(alert);
-      console.log("gagal upload product", err);
+      console.log('gagal upload product', err);
       console.log(form.amenities);
     }
   });
@@ -84,9 +84,9 @@ export const AddProperty = () => {
     <Container className="">
       <Navbars />
       <Form
-        onSubmit={(e) => handleSubmit.mutate(e)}
+        onSubmit={e => handleSubmit.mutate(e)}
         className="fw-bold"
-        style={{ marginTop: "150px" }}
+        style={{ marginTop: '150px' }}
       >
         <Form.Group name="name" className="mb-3">
           <Form.Label>Name Property</Form.Label>
@@ -100,13 +100,13 @@ export const AddProperty = () => {
           />
         </Form.Group>
         <div className="border border-dark p-1">
-          <Card.Img style={{ height: "500px" }} src={preview} />
+          <Card.Img style={{ height: '500px' }} src={preview} />
         </div>
         <input type="file" id="upload" name="image" hidden onChange={handleChange} />
         <div
-          style={{ display: "flex", width: "100%", justifyContent: "center", marginBlock: "2rem" }}
+          style={{ display: 'flex', width: '100%', justifyContent: 'center', marginBlock: '2rem' }}
         >
-          <label style={{ cursor: "pointer" }} for="upload" className="label-file-add-product">
+          <label style={{ cursor: 'pointer' }} for="upload" className="label-file-add-product">
             Upload file
           </label>
         </div>
@@ -129,7 +129,7 @@ export const AddProperty = () => {
             name="address"
             value={form.address}
             type="text"
-            style={{ resize: "none" }}
+            style={{ resize: 'none' }}
             autoFocus
           />
         </Form.Group>
@@ -155,13 +155,13 @@ export const AddProperty = () => {
             autoFocus
           />
         </Form.Group>
-        <Form.Group name="type_of_rent" className="mb-3">
+        <Form.Group name="type_rent" className="mb-3">
           <Form.Label>Type of Rent</Form.Label>
           <Form.Select
             onChange={handleChange}
-            id="type_of_rent"
-            value={form.type_of_rent}
-            name="type_of_rent"
+            id="type_rent"
+            value={form.type_rent}
+            name="type_rent"
             type="text"
             autoFocus
           >
@@ -173,10 +173,10 @@ export const AddProperty = () => {
         </Form.Group>
         <Form.Group name="amenities" className="mb-3">
           <Form.Label>Amenities</Form.Label>
-          <div className="d-flex gap-5" style={{ fontWeight: "500", fontSize: "1.2rem" }}>
+          <div className="d-flex gap-5" style={{ fontWeight: '500', fontSize: '1.2rem' }}>
             <Form.Check
               onChange={handleChange}
-              checked={form.amenities.includes("Furnished")}
+              checked={form.amenities.includes('Furnished')}
               value="Furnished"
               type="checkbox"
               id="Furnished"
@@ -185,7 +185,7 @@ export const AddProperty = () => {
             />
             <Form.Check
               onChange={handleChange}
-              checked={form.amenities.includes("Pet Allowed")}
+              checked={form.amenities.includes('Pet Allowed')}
               type="checkbox"
               id="Pet Allowed"
               label="Pet Allowed"
@@ -194,7 +194,7 @@ export const AddProperty = () => {
             />
             <Form.Check
               onChange={handleChange}
-              checked={form.amenities.includes("Shared Accomodation")}
+              checked={form.amenities.includes('Shared Accomodation')}
               type="checkbox"
               // id="shared-accomodation"
               id="Shared Accomodation"
@@ -240,7 +240,7 @@ export const AddProperty = () => {
 
         {message && message}
         <Col className="d-flex mb-5 justify-content-center">
-          <Button type="submit" className=" click" style={{ border: "none", width: "15rem" }}>
+          <Button type="submit" className=" click" style={{ border: 'none', width: '15rem' }}>
             Save
           </Button>
         </Col>

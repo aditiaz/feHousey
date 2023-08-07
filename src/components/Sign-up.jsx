@@ -1,62 +1,65 @@
 // import Button from "react-bootstrap/Button";
-import { Modal, Button, Form, Alert } from "react-bootstrap";
+import { Modal, Button, Form, Alert } from 'react-bootstrap';
 // import Form from "react-bootstrap/Form";
-import { RoomsContext } from "../context/roomsContext";
-import { React, useContext, useState } from "react";
-import { SignIn } from "./Sign-in";
-import { useMutation } from "react-query";
-import { API } from "../lib/_api";
+import { RoomsContext } from '../context/roomsContext';
+import { React, useContext, useState } from 'react';
+import { SignIn } from './Sign-in';
+import { useMutation } from 'react-query';
+import { API } from '../lib/_api';
 
-export const SignUp = (props) => {
+export const SignUp = props => {
   const { setModalSignIn, setModalSignUp, modalSignUp, modalSignIn } = useContext(RoomsContext);
   // const[setModalSignUp,modalSignUp]
 
   const { handleSignUpChange, handleSignUpSubmit } = useContext(RoomsContext);
   // console.log(localSignUpForm2);
   const [message, setMessage] = useState(null);
-  const listAs = [{ value: "" }, { value: "Tenant" }, { value: "Owner" }];
-  const genders = [{ value: "" }, { value: "Man" }, { value: "Woman" }];
+  const listAs = [{ value: '' }, { value: 'Tenant' }, { value: 'Owner' }];
+  const genders = [{ value: '' }, { value: 'Man' }, { value: 'Woman' }];
   const [formSubmit, setFormSubmit] = useState({
-    fullname: "",
-    username: "",
-    email: "",
-    password: "",
-    listAs: "",
-    gender: "",
-    phone: "",
-    address: "",
+    fullname: '',
+    username: '',
+    email: '',
+    password: '',
+    listAs: '',
+    gender: '',
+    phone: '',
+    address: '',
   });
   const { fullname, username, email, password, list_as_id, gender, phone, address } = formSubmit;
-  const handleChange = (e) => {
+  const handleChange = e => {
     setFormSubmit({
       ...formSubmit,
       [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = useMutation(async (e) => {
+  const handleSubmit = useMutation(async e => {
     try {
       e.preventDefault();
 
       const config = {
         headers: {
-          "Content-type": "application/json",
+          'Content-type': 'application/json',
         },
       };
       const body = JSON.stringify(formSubmit);
-      const response = await API.post("/register", body, config);
+      const response = await API.post('/register', body, config);
       setFormSubmit({
-        fullname: "",
-        username: "",
-        email: "",
-        password: "",
-        listAs: "",
-        gender: "",
-        phone: "",
-        address: "",
+        fullname: '',
+        username: '',
+        email: '',
+        password: '',
+        listAs: '',
+        gender: '',
+        phone: '',
+        address: '',
       });
       console.log(response);
     } catch (err) {
+      if (err.response.data.message) {
+        alert('Email Sudah Digunakan');
+      }
       console.log(err);
     }
 
@@ -74,8 +77,8 @@ export const SignUp = (props) => {
       <h2 className="d-flex justify-content-center my-3">Sign Up</h2>
       {message && message}
 
-      <Modal.Body style={{ height: "35rem", overflow: "hidden", overflow: "auto" }}>
-        <Form onSubmit={(e) => handleSubmit.mutate(e)} className="fw-bold">
+      <Modal.Body style={{ height: '35rem', overflow: 'hidden', overflow: 'auto' }}>
+        <Form onSubmit={e => handleSubmit.mutate(e)} className="fw-bold">
           <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
             <Form.Label>Full Name</Form.Label>
             <Form.Control
@@ -113,7 +116,7 @@ export const SignUp = (props) => {
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>List As</Form.Label>
             <Form.Select onChange={handleChange} id="listAs" name="listAs" type="text" autoFocus>
-              {listAs.map((e) => {
+              {listAs.map(e => {
                 return <option>{e.value}</option>;
               })}
             </Form.Select>
@@ -121,7 +124,7 @@ export const SignUp = (props) => {
           <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
             <Form.Label>Gender</Form.Label>
             <Form.Select onChange={handleChange} id="gender" name="gender" type="text" autoFocus>
-              {genders.map((e) => {
+              {genders.map(e => {
                 return <option>{e.value}</option>;
               })}
             </Form.Select>
@@ -139,7 +142,7 @@ export const SignUp = (props) => {
               id="address"
               name="address"
               type="text"
-              style={{ resize: "none" }}
+              style={{ resize: 'none' }}
               autoFocus
             />
           </Form.Group>
@@ -147,7 +150,7 @@ export const SignUp = (props) => {
           <Button
             type="submit"
             className="w-100 click"
-            style={{ border: "none" }}
+            style={{ border: 'none' }}
             onClick={() => {
               {
                 setModalSignUp(false);
@@ -167,7 +170,7 @@ export const SignUp = (props) => {
               }
             }}
             className="nav-link fw-bold"
-            style={{ cursor: "pointer" }}
+            style={{ cursor: 'pointer' }}
           >
             Here
           </p>

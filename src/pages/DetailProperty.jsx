@@ -1,15 +1,15 @@
-import React, { useContext, useState } from "react";
-import * as Components from "../components";
-import bed from "../assets/bed.svg";
-import bathub from "../assets/bathub.svg";
-import { Button, Col, Modal, Form } from "react-bootstrap";
-import { useParams, useNavigate } from "react-router-dom";
-import moment from "moment";
-import { API } from "../lib/_api";
-import { useQuery } from "react-query";
+import React, { useContext, useState } from 'react';
+import * as Components from '../components';
+import bed from '../assets/bed.svg';
+import bathub from '../assets/bathub.svg';
+import { Button, Col, Modal, Form } from 'react-bootstrap';
+import { useParams, useNavigate } from 'react-router-dom';
+import moment from 'moment';
+import { API } from '../lib/_api';
+import { useQuery } from 'react-query';
 
 export const DetailProperty = () => {
-  const today = moment().format(" Do MMMM YYYY");
+  const today = moment().format(' Do MMMM YYYY');
   // const { rooms } = useContext(RoomsContext);
   const { room } = useParams();
   // const detailRoom = rooms[room - 1];
@@ -17,17 +17,18 @@ export const DetailProperty = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  let { data: property } = useQuery("propertyCache", async () => {
+  let { data: property } = useQuery('propertyCache', async () => {
     const response = await API.get(`/property/` + room);
     return response.data.data;
   });
+  console.log(property);
   // console.log(propety);
   const [checkIn, setCheckin] = useState({
-    check_in: "",
-    check_out: "",
+    check_in: '',
+    check_out: '',
   });
   // console.log(checkIn);
-  const handleCheckInOut = (e) => {
+  const handleCheckInOut = e => {
     setCheckin({
       ...checkIn,
       [e.target.name]: e.target.value,
@@ -35,17 +36,17 @@ export const DetailProperty = () => {
   };
   const handleLocal = () => {
     setShow(true);
-    localStorage.setItem("Date", JSON.stringify(checkIn));
+    localStorage.setItem('Date', JSON.stringify(checkIn));
   };
   // console.log(detailRoom);
   return (
     <>
       <Components.Navbars />;
-      <Col className="my-5" style={{ marginInline: "10rem" }}>
+      <Col className="my-5" style={{ marginInline: '10rem' }}>
         <Col className="w-100  detailPics">
           {/* <Col className="" style={{ backgroundColor: "green", height: "45rem" }}> */}
           <img
-            style={{ width: "100%", height: "35rem", marginTop: "65px" }}
+            style={{ width: '100%', height: '35rem', marginTop: '65px' }}
             src={property?.image}
             alt="pics"
           />
@@ -69,10 +70,10 @@ export const DetailProperty = () => {
             // style={{ backgroundColor: "salmon" }}
           >
             <div className="p-0 col-8">
-              <p style={{ fontSize: "2rem", backgroundColor: "white" }}>
+              <p style={{ fontSize: '2rem', backgroundColor: 'white' }}>
                 Rp.{property?.price.toLocaleString()} / {property?.type_of_rent}
               </p>
-              <p className="text-secondary" style={{ fontSize: "1rem", width: "20rem" }}>
+              <p className="text-secondary" style={{ fontSize: '1rem', width: '20rem' }}>
                 {property?.address},{property?.city}
               </p>
             </div>
@@ -110,12 +111,12 @@ export const DetailProperty = () => {
           </div>
           <h1 className="fw-bold">Description</h1>
           <p className="text-secondary ">{property?.description}</p>
-          {localStorage.Roles == "Tenant" ? (
+          {localStorage.Roles == 'Tenant' ? (
             <>
               <div className="d-flex justify-content-end w-100 my-5">
                 <Button
                   className="click fw-bold"
-                  style={{ width: "15rem", height: "3.5rem", fontSize: "1.5rem" }}
+                  style={{ width: '15rem', height: '3.5rem', fontSize: '1.5rem' }}
                   onClick={handleShow}
                 >
                   Book Now
@@ -129,20 +130,20 @@ export const DetailProperty = () => {
                   <Form>
                     <Form.Group
                       className="mb-3"
-                      style={{ display: "flex", flexDirection: "column" }}
+                      style={{ display: 'flex', flexDirection: 'column' }}
                       controlId="exampleForm.ControlInput1"
                     >
                       <h4 className="text-center">Today is {today}</h4>
-                      <Form.Label style={{ fontWeight: "bold" }}>Check-in</Form.Label>
+                      <Form.Label style={{ fontWeight: 'bold' }}>Check-in</Form.Label>
                       <input type="date" name="check_in" onChange={handleCheckInOut} />
                     </Form.Group>
                     <Form.Group
                       className="mb-3"
-                      style={{ display: "flex", flexDirection: "column" }}
+                      style={{ display: 'flex', flexDirection: 'column' }}
                       controlId="exampleForm.ControlInput1"
                     >
                       {/* <Calendar name="check_out" onChange={handleCheckInOut} /> */}
-                      <Form.Label style={{ fontWeight: "bold" }}>Check-Out</Form.Label>
+                      <Form.Label style={{ fontWeight: 'bold' }}>Check-Out</Form.Label>
                       <input
                         type="date"
                         data-provide="datepicker"
@@ -153,7 +154,7 @@ export const DetailProperty = () => {
                   </Form>
                 </Modal.Body>
                 <Modal.Footer
-                  style={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+                  style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
                 >
                   <Button
                     variant="primary"
@@ -161,7 +162,7 @@ export const DetailProperty = () => {
                       handleLocal();
                       navigate(`/booking/${room}`);
                     }}
-                    style={{ backgroundColor: "#5A57AB", width: 200 }}
+                    style={{ backgroundColor: '#5A57AB', width: 200 }}
                   >
                     Order
                   </Button>
