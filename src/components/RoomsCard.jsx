@@ -19,7 +19,7 @@ export const RoomsCard = () => {
   console.log(properties);
 
   const property = filtered ? filtered : properties;
-  // console.log(property);
+  console.log(property);
   return (
     <Col size="lg" style={{ marginBlock: '1rem', marginInlineStart: '25rem' }}>
       <CardGroup className="   gap-3 d-flex justify-content-center" style={{ marginTop: '12rem' }}>
